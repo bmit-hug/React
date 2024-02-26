@@ -1,0 +1,104 @@
+
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
+
+:root {
+  --box-gap: 40px;
+  --wid-pad: 24px;
+  --bord-rad: 8px;
+
+  --rgb-05: rgb(12.75, 12.75, 12.75);
+  --rgb-10: rgb(25.5, 25.5, 25.5);
+  --rgb-15: rgb(38.25, 38.25, 38.25);
+  --rgb-20: rgb(51, 51, 51);
+  --rgb-25: rgb(63.75, 63.75, 63.75);
+  --rgb-30: rgb(76.5, 76.5, 76.5);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Quicksand";
+  font-size: calc(10px + 1vmin);
+  font-weight: normal;
+  color: white;
+}
+
+.app {
+  display: grid;
+  row-gap: var(--box-gap);
+  width: 100%;
+  height: 100%;
+  background-color: var(--rgb-05);
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: space-evenly;
+}
+
+button {
+  width: fit-content;
+  padding: 2px 6px;
+  background-color: var(--rgb-20);
+  border: 2px solid var(--rgb-25) !important;
+  border-radius: var(--bord-rad);
+  border: 0;
+  font-size: 16px;
+}
+
+.pointer {
+  transition: all 200ms;
+}
+
+.pointer:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+/* Only React */
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+.task-box {
+  display: grid;
+  padding: 30px;
+  row-gap: 20px;
+  background-color: var(--rgb-10);
+  border: 2px solid var(--rgb-15);
+  border-radius: var(--bord-rad);
+}
+
+.all-tasks {
+  display: inherit;
+  row-gap: 16px;
+}
+
+.task {
+  display: inherit;
+  row-gap: 8px;
+  background-color: var(--rgb-15);border: 2px solid rgb(50, 50, 50);
+  border-radius: var(--bord-rad);
+  padding: 8px;
+}
+
+.answer {
+  width: fit-content;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+#first {
+  margin-top: var(--box-gap);
+}
+
+#last {
+  margin-bottom: var(--box-gap);
+}
