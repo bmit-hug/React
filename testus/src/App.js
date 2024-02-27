@@ -56,6 +56,7 @@ function App() {
         <h2>Medium Tasks</h2>
 
         <div className='all-tasks'>
+
           <div className='task'>
             <h3>Task 1: Spread operators</h3>
             <MediumTasks.Task1Parent/>
@@ -83,10 +84,16 @@ function App() {
         <h2>Hard Tasks</h2>
 
         <div className='all-tasks'>
+          
           <div className='task'>
             <h3>Task 1: Data fetching!</h3>
             <HardTasks.Task1/>
             {/* Implementation for other tasks is left as a task in itself */}
+          </div>
+
+          <div className='task'>
+            <h3>Task 2: Complex state</h3>
+            <HardTasks.Task2/>
           </div>
         </div>
       </div>

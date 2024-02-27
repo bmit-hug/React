@@ -1,11 +1,11 @@
-
 @import url("https://fonts.googleapis.com/css?family=Quicksand");
 
 :root {
   --box-gap: 40px;
+  --el-gap: 8px;
   --wid-pad: 24px;
-  --bord-rad: 8px;
-
+  --bord-rad: 6px;
+  --bord-wid: 1px;
   --rgb-05: rgb(12.75, 12.75, 12.75);
   --rgb-10: rgb(25.5, 25.5, 25.5);
   --rgb-15: rgb(38.25, 38.25, 38.25);
@@ -20,40 +20,33 @@
   font-size: calc(10px + 1vmin);
   font-weight: normal;
   color: white;
+  transition: opacity 200ms;
 }
 
-.app {
+.app, body {
   display: grid;
-  row-gap: var(--box-gap);
+  gap: var(--box-gap);
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: var(--rgb-05);
   justify-content: center;
   justify-items: center;
-  align-items: center;
-  align-content: space-evenly;
+  align-items: start;
 }
 
 button {
   width: fit-content;
   padding: 2px 6px;
   background-color: var(--rgb-20);
-  border: 2px solid var(--rgb-25) !important;
+  border: var(--bord-wid) solid var(--rgb-25) !important;
   border-radius: var(--bord-rad);
-  border: 0;
   font-size: 16px;
-}
-
-.pointer {
-  transition: all 200ms;
 }
 
 .pointer:hover {
   cursor: pointer;
   opacity: 0.75;
 }
-
-/* Only React */
 
 p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
@@ -67,12 +60,24 @@ h2 {
   font-size: 32px;
 }
 
+ul {
+  margin: 0;
+}
+
+ul {
+  padding-left: 35px !important;
+}
+
+li {
+  padding: 0;
+}
+
 .task-box {
   display: grid;
   padding: 30px;
   row-gap: 20px;
   background-color: var(--rgb-10);
-  border: 2px solid var(--rgb-15);
+  border: var(--bord-wid) solid var(--rgb-15);
   border-radius: var(--bord-rad);
 }
 
@@ -81,24 +86,102 @@ h2 {
   row-gap: 16px;
 }
 
-.task {
+.task,
+.answer {
   display: inherit;
-  row-gap: 8px;
-  background-color: var(--rgb-15);border: 2px solid rgb(50, 50, 50);
+  row-gap: var(--el-gap);
   border-radius: var(--bord-rad);
-  padding: 8px;
+}
+
+.task {
+  background-color: var(--rgb-15);
+  border: var(--bord-wid) solid var(--rgb-20);
+  padding: var(--el-gap) 10px;
 }
 
 .answer {
-  width: fit-content;
+  width: 100%;
   font-style: italic;
-  opacity: 0.5;
+  background-color: var(--rgb-10);
+  border: var(--bord-wid) solid var(--rgb-20);
+  padding: 10px 12px;
 }
 
 #first {
   margin-top: var(--box-gap);
+  grid-row: 1;
+  grid-column: 1 / 4;
 }
 
 #last {
   margin-bottom: var(--box-gap);
+}
+
+input {
+  background-color: var(--rgb-20);
+  border: var(--bord-wid) solid var(--rgb-25);
+  border-radius: var(--bord-rad);
+}
+
+.break {
+  max-width: 400px;
+  word-wrap: break-word;
+}
+
+.todo-element {
+  display: grid;
+  justify-content: space-between;
+  column-gap: var(--el-gap);
+  padding: 4px 0;
+}
+
+.todo-element p {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.todo-element * {
+  grid-row: 1;
+}
+
+.action-buttons {
+  display: grid;
+  column-gap: var(--el-gap);
+}
+
+.span-button {
+  width: 100%;
+  display: grid;
+  justify-content: space-between;
+  column-gap: var(--el-gap);
+}
+
+.span-button * {
+  grid-row: 1;
+}
+
+.delete-icon {
+  width: 16px;
+}
+
+.delete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--rgb-10);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--rgb-20)
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--rgb-25);
 }

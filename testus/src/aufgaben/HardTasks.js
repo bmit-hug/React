@@ -1,55 +1,109 @@
 import React, { useState, useEffect, useReducer } from 'react';
+import deleteIcon from '../delete-icon.svg';
 
-/**
- * Task 1: Fetching Data with useEffect
- * Instructions:
- * - Use the `useState` hook to create a state variable `userData` initialized to `null`.
- * - Use the `useEffect` hook to fetch user data from the URL 'https://jsonplaceholder.typicode.com/users/1' when the component mounts.
- * - Once the data is fetched, update `userData` with the fetched data.
- * - Conditionally render the user's name if `userData` is not `null`, otherwise display "Loading user data...".
- * 
- * This task teaches you how to fetch and display data from an API in a React component.
- */
+// Task 1
 export const Task1 = () => {
-  // Step 1: Initialize `userData` state here
 
-  // Step 2: Fetch data within useEffect here
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+        const data = await response.json();
+        setUserData(data);
+
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <div>
-      {/* Step 3: Conditionally render `userData` or loading message here */}
-    </div>
+    <>
+      {userData ? (
+        <p className='answer'>User's name: {userData.name}</p>
+      ) : (
+        <p>Loading user data...</p>
+      )}
+    </>
   );
 };
 
-/**
- * Task 2: Managing Complex State with useReducer
- * Instructions:
- * - Define an initial state object and a reducer function for a to-do list application. The state should include an array of to-dos.
- * - Use the `useReducer` hook with your reducer function and the initial state to manage to-dos.
- * - Implement actions in your reducer function for adding, deleting, and toggling the completion status of to-dos.
- * - Render the list of to-dos and provide buttons for each action.
- * 
- * This task introduces you to `useReducer` for managing more complex state logic that involves multiple sub-values or when the next state depends on the previous one.
- */
+// Task 2
 export const Task2 = () => {
-  // Define `initialState` and `reducer` function here
 
-  // Use `useReducer` here with your `reducer` function and `initialState`
+  const initialState = {
+    todos: []
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+
+      case 'ADD_TODO':
+        return {
+          todos: [...state.todos, { id: Date.now(), text: action.payload, completed: false }]
+        };
+
+      case 'DELETE_TODO':
+        return {
+          todos: state.todos.filter(todo => todo.id !== action.payload)
+        };
+
+      case 'TOGGLE_TODO':
+        return {
+          todos: state.todos.map(todo =>
+            todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo
+          )
+        };
+
+      default:
+        return state;
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const addTodo = (text) => {
+    dispatch({ type: 'ADD_TODO', payload: text });
+  };
+
+  const deleteTodo = (id) => {
+    dispatch({ type: 'DELETE_TODO', payload: id });
+  }
+
+  const toggleTodo = (id) => {
+    dispatch({ type: 'TOGGLE_TODO', payload: id });
+  }
 
   return (
-    <div>
-      {/* Render your to-do list and action buttons here */}
+    <div className='answer'>
+      <h2>To-Do List</h2>
+      <ul className='todo'>
+
+        {state.todos.map(todo => (
+          <li key={todo.id}>
+          <div className='todo-element'>
+            <p style={{ textDecoration: todo.completed ? 'line-through' : 'none', opacity: todo.completed ? 0.5 : 1 }}>
+              {todo.text}
+            </p>
+            <div className='action-buttons'>
+              <button className='pointer' style={{ gridColumn: 1 }} onClick={() => toggleTodo(todo.id)}>Toggle</button>
+              <button className='pointer delete-button' style={{ gridColumn: 2 }} onClick={() => deleteTodo(todo.id)}>
+                <img className='delete-icon' src={deleteIcon}/>
+              </button>
+            </div>
+          </div>
+        </li> 
+        ))}
+      </ul>
+      <input
+        type='text'
+        placeholder='Add new todo'
+        onKeyDown={(e) => e.key === 'Enter' && addTodo(e.target.value)}
+        />
     </div>
   );
 };
-
-
-
-/**
- * If these are too easy or too boring, try tasks like:
- * - Saving useState data in a cookie
- * - 
- * 
- * 
- */
